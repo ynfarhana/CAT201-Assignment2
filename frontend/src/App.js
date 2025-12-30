@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import { Footer } from "./components/Footer/Footer";
@@ -8,11 +8,17 @@ import ain from "./ain.JPG";
 import aida from "./aida.jpg";
 import iman from "./iman.JPG";
 import fara from "./fara.JPG";
+import project1_image from "./project1_image.png";
+import project2_image from "./project2_image.png";
+import project3_image from "./project3_image.png";
 
 function App() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const toggleModal = () => setIsModalOpen(!isModalOpen);
+
   return (
     <div className="app-wrapper">
-      <Navbar />
+      <Navbar onConsultClick={toggleModal}/>
       <Hero />
 
       {/* Main Content Container */}
@@ -165,7 +171,7 @@ function App() {
           <div className="portfolio-grid">
             {/* Project 1 */}
             <div className="portfolio-item">
-              <img src="project1-image.jpg" alt="E-Commerce Platform" />
+              <img src={project1_image} alt="E-Commerce Platform" />
               <div className="portfolio-overlay">
                 <div className="overlay-content">
                   <span className="project-category">Web Development</span>
@@ -177,7 +183,7 @@ function App() {
 
             {/* Project 2 */}
             <div className="portfolio-item">
-              <img src="project2-image.jpg" alt="Booking App" />
+              <img src={project2_image} alt="Booking App" />
               <div className="portfolio-overlay">
                 <div className="overlay-content">
                   <span className="project-category">Mobile App</span>
@@ -189,7 +195,7 @@ function App() {
 
             {/* Project 3 */}
             <div className="portfolio-item">
-              <img src="project3-image.jpg" alt="Dashboard Design" />
+              <img src={project3_image} alt="Dashboard Design" />
               <div className="portfolio-overlay">
                 <div className="overlay-content">
                   <span className="project-category">UI/UX Design</span>
@@ -309,6 +315,36 @@ function App() {
       </button>
 
       </main>
+      
+      {/* --- CONSULTATION MODAL --- */}
+      {isModalOpen && (
+        <div className="modal-overlay" onClick={toggleModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="close-modal" onClick={toggleModal}>&times;</button>
+            
+            <div className="modal-header">
+              <h2>Book a Free Consultation</h2>
+              <p>Tell us about your project and we'll get back to you within 24 hours.</p>
+            </div>
+
+            <form className="consult-form">
+              <div className="form-row">
+                <input type="text" placeholder="Full Name" required />
+                <input type="email" placeholder="Work Email" required />
+              </div>
+              <select required>
+                <option value="" disabled selected>Interested Service</option>
+                <option value="web">Web Design & Development</option>
+                <option value="app">Mobile App Development</option>
+                <option value="uiux">UI/UX Strategy</option>
+                <option value="consultancy">IT Consultancy</option>
+              </select>
+              <textarea placeholder="Briefly describe your project goals..." rows="4"></textarea>
+              <button type="submit" className="btn-submit-consult">Confirm Booking</button>
+            </form>
+          </div>
+        </div>
+      )}
       
       <Footer />
     </div>

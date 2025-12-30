@@ -1,7 +1,7 @@
 import React from 'react';
 import './Navbar.css';
 
-const Navbar = () => {
+function Navbar({onConsultClick}) {
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -23,7 +23,7 @@ const Navbar = () => {
 
         {/* Button Group */}
         <div className="nav-actions">
-          <button className="btn-consult">Consult Now</button>
+          <button className="btn-consult" onClick={onConsultClick}>Consult Now</button>
           <div className="user-profile">
             <span className="user-icon">👤</span>
           </div>
