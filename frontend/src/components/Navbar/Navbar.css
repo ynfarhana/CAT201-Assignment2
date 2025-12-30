@@ -76,6 +76,58 @@
   width: 100%; /* Line grows from left to right on hover */
 }
 
+.mobile-menu-icon {
+  display: none; /* Hidden on Desktop */
+}
+
+/* --- MOBILE RESPONSIVE FIX (Targeting phones) --- */
+@media screen and (max-width: 850px) {
+  .nav-links {
+    display: none; /* Hide standard links on mobile */
+  }
+
+  .logo-name {
+    font-size: 0.9rem; /* Make logo text smaller to save space */
+  }
+
+  .btn-consult {
+    padding: 8px 15px;
+    font-size: 0.75rem; /* Shrink button so it fits */
+  }
+
+  .mobile-menu-icon {
+    display: block;
+    margin-left: 15px;
+    cursor: pointer;
+  }
+
+  /* Mobile Dropdown Menu */
+  .nav-menu-mobile {
+    position: absolute;
+    top: 70px;
+    right: 5%;
+    background: white;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    padding: 2rem;
+    width: 200px;
+    z-index: 1000;
+  }
+
+  .nav-links-mobile {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .nav-links-mobile a {
+    text-decoration: none;
+    color: #003366;
+    font-weight: 600;
+  }
+}
+
 /* Styling for the dropdown arrow in 'Services' */
 .arrow {
   font-size: 10px;
