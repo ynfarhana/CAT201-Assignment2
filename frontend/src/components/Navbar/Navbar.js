@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { RiMenu3Line, RiCloseLine } from 'react-icons/ri';
 import './Navbar.css';
 
-function Navbar({onConsultClick}) {
+function Navbar({ onConsultClick }) {
   const [toggleMenu, setToggleMenu] = useState(false);
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -11,11 +12,10 @@ function Navbar({onConsultClick}) {
         <div className="logo-section">
           <div className="logo-box">{"<>"}</div>
           <span className="logo-name">NEXTGEN IT</span>
-          
         </div>
 
-        {/* Links Group - This is what needs to be horizontal */}
-        <ul className="nav-menu"> 
+        {/* Desktop Links Group */}
+        <ul className="nav-menu">
           <li><a href="#about-section">About Us</a></li>
           <li><a href="#services-section">Services</a></li>
           <li><a href="#portfolio">Portfolio</a></li>
@@ -23,36 +23,43 @@ function Navbar({onConsultClick}) {
           <li><a href="#contact">Contact Us</a></li>
         </ul>
 
-        {/* Button Group */}
+        {/* Action Group */}
         <div className="nav-actions">
-          <button className="btn-consult" onClick={onConsultClick}>Consult Now</button>
-          <div className="user-profile">
-            <span className="user-icon">👤</span>
+          <button className="btn-consult" onClick={onConsultClick}>
+            Consult Now
+          </button>
 
-              {/* Mobile Menu Icon */}
-              <div className="mobile-menu-icon">
-                {toggleMenu 
-                  ? <RiCloseLine color="#003366" size={27} onClick={() => setToggleMenu(false)} />
-                  : <RiMenu3Line color="#003366" size={27} onClick={() => setToggleMenu(true)} />
-                }
-              </div>
+          {/* User Profile - will hide on mobile because of 'desktop-only' class */}
+          <div className="user-profile desktop-only">
+            <span className="user-icon">👤</span>
+          </div>
+
+          {/* Mobile Menu Icon */}
+          <div className="mobile-menu-icon" onClick={() => setToggleMenu(!toggleMenu)}>
+            {toggleMenu 
+              ? <RiCloseLine color="#003366" size={27} /> 
+              : <RiMenu3Line color="#003366" size={27} />
+            }
           </div>
         </div>
 
-        {/* Mobile Overlay Menu */}
-        {toggleMenu && (
-          <div className="nav-menu-mobile">
-            <ul className="nav-links-mobile">
-              <li><a href="#about-section" onClick={() => setToggleMenu(false)}>About</a></li>
-              <li><a href="#services-section" onClick={() => setToggleMenu(false)}>Services</a></li>
-              <li><a href="#portfolio" onClick={() => setToggleMenu(false)}>Portfolio</a></li>
-            </ul>
-          </div>
-        )}
+        {/* Mobile Sidebar Overlay */}
+        <div className={`nav-menu-mobile ${toggleMenu ? 'active' : ''}`}>
+          <ul className="nav-links-mobile">
+            <li><a href="#about-section" onClick={() => setToggleMenu(false)}>About Us</a></li>
+            <li><a href="#services-section" onClick={() => setToggleMenu(false)}>Services</a></li>
+            <li><a href="#portfolio" onClick={() => setToggleMenu(false)}>Portfolio</a></li>
+            <li><a href="#feedback" onClick={() => setToggleMenu(false)}>Feedback</a></li>
+            <li><a href="#contact" onClick={() => setToggleMenu(false)}>Contact Us</a></li>
+          </ul>
+        </div>
 
+        {/* Overlay Background to close menu when clicking outside */}
+      {toggleMenu && <div className="menu-overlay" onClick={() => setToggleMenu(false)}></div>}
+      
       </div>
     </nav>
   );
-};
+}
 
 export default Navbar;
